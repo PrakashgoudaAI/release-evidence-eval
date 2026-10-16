@@ -4,7 +4,7 @@ An evaluation harness for an assistant that reads CI evidence and recommends **r
 
 The evaluator checks the response contract, decision, blockers, citations, and policy reasons separately. Every case must pass; repeated-trial experiments require every attempt to pass.
 
-**Current status:** 103 automated tests pass locally. The first [real Qwen3 4B baseline](docs/experiments/001-qwen3-baseline.md) passed 24/48 attempts and produced 18 unsafe ready recommendations; the quality gate failed it. The supplied reference responses remain authored fixtures, not model results. No production-readiness or general security claim is made. See [verification](docs/verification.md).
+**Current status:** 107 automated tests pass locally. The first [real Qwen3 4B baseline](docs/experiments/001-qwen3-baseline.md) passed 24/48 attempts and produced 18 unsafe ready recommendations; the quality gate failed it. The supplied reference responses remain authored fixtures, not model results. No production-readiness or general security claim is made. See [verification](docs/verification.md).
 
 The [prompt v2 comparison](docs/experiments/002-prompt-comparison.md) regressed to 15/48 passing attempts and 24 unsafe ready recommendations. V2 was rejected, not presented as an improvement. The reserved set has not been evaluated.
 
@@ -31,7 +31,7 @@ Expected offline output:
 Caught 6/6 targeted response faults (offline fixtures, not model results).
 ```
 
-The first line proves the evaluator accepts the reference answers. The second proves it rejects six deliberately flawed responses. Neither measures a model's performance. The automated suite currently contains 103 tests.
+The first line proves the evaluator accepts the reference answers. The second proves it rejects six deliberately flawed responses. Neither measures a model's performance. The automated suite currently contains 107 tests.
 
 ## Repeated trials, not a lucky answer
 
