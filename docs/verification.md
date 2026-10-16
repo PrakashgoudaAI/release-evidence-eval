@@ -4,7 +4,7 @@ Date: 16 October 2026. Environment: macOS, Python 3.9.6 supplied by the host. Ea
 
 ## Current summary
 
-- 103 automated tests pass locally. Offline reference, mutation, repeated-trial negative-control, and policy-guard checks pass.
+- 107 automated tests pass locally. Offline reference, mutation, repeated-trial negative-control, and policy-guard checks pass.
 - Qwen3 development results: v1 24/48 passing attempts, v2 15/48, v3 12/48. All failed the quality gate; both candidates were rejected. See the [v3 study](experiments/004-v3-comparison.md).
 - A private 12-response diagnostic replay accepted four correct recommendations and rejected eight incorrect ones through the new [policy guard](policy-guard.md). This selected development sample is not held-out validation and does not improve raw model accuracy.
 - The guard accepted all 16 authored development answers and rejected 32 deliberately wrong decisions. It does not authorize deployment or authenticate evidence.
@@ -41,7 +41,6 @@ Both ordinary and repeated-trial reports omit raw content. The new failure-analy
 ## Not yet verified
 
 - Independent runtime API attestation and model comparisons across different settings/hardware.
-- Downloaded CI-report artifact review (the source archive has been reviewed separately).
 - Held-out evaluation, natural-language claim scoring, tool-use safety, or independent security review.
 
 ## Publication-safety milestone
@@ -77,6 +76,26 @@ Prompt v2 completed with 15/48 passing attempts, 5/16 robust passes, 24 unsafe-r
 The comparison report SHA-256 is `fbe979bb7f6a09ee93f6c901436f65e4e0b98aa0bc0ca129f653a292b14f0767`. See [the comparison study](experiments/002-prompt-comparison.md). The v2 review-summary known-pattern scan passed; no upload occurred. Raw answers and a complete root cause remain unavailable, and reserved-set performance is still unmeasured.
 
 ## Before publishing
+
+### Follow-up artifact review
+
+All four report archives from run `38910268844` were downloaded for review. Each
+contained exactly the seven expected offline JSON reports; known credential-pattern
+checks found no matches. Reference scores and the deliberate repeated-trial failure
+were consistent across platforms. This is a bounded review, not a general security audit.
+
+Comparison found one cross-platform difference: ordinary reference/comparison report
+prompt hashes differed on Windows because checkout converted LF to CRLF. Dataset
+and schema hashes matched. Repeated-trial reports already used a text reader with
+newline normalization, while the single-run reader preserved bytes. Rather than
+silently change prompt fingerprint semantics or historical reports, `.gitattributes`
+now requires LF checkout for text files. Tests check this rule and checked-out
+prompt bytes. Cross-platform artifact equality must be rechecked after the change.
+
+CI artifact upload now names seven offline reports explicitly instead of using a
+reports-directory wildcard. A test prevents broadening that list accidentally.
+This is preventive hardening; no unexpected/private report was found in the reviewed
+archives. Existing model reports, golden labels, and scoring rules remain unchanged.
 
 1. Review all 23 expected labels against the policy, not just the oracle; keep reserved-case use separate from tuning.
 2. Repeat the clean source-only verification in the configured CI environments; the local copy check is complete.
