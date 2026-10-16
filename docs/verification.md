@@ -9,7 +9,7 @@ Date: 16 October 2026. Environment: macOS, Python 3.9.6 supplied by the host. Ea
 - A private 12-response diagnostic replay accepted four correct recommendations and rejected eight incorrect ones through the new [policy guard](policy-guard.md). This selected development sample is not held-out validation and does not improve raw model accuracy.
 - The guard accepted all 16 authored development answers and rejected 32 deliberately wrong decisions. It does not authorize deployment or authenticate evidence.
 - Known-pattern source scanning passed, but Git history is unavailable because this project is not a Git repository. No full security-audit claim is made.
-- Reserved-model evaluation and independent review remain outstanding. The source is published on [review pull request #1](https://github.com/PrakashgoudaAI/release-evidence-eval/pull/1); it is not merged.
+- Reserved-model evaluation and independent review remain outstanding. Source history, checks, and merge status are tracked in [pull request #1](https://github.com/PrakashgoudaAI/release-evidence-eval/pull/1).
 - All four Python 3.11/3.13 Linux/Windows jobs passed in [the initial CI run](https://github.com/PrakashgoudaAI/release-evidence-eval/actions/runs/38909886088), at commit `49494e8aec8e706fc26ed3e9335b87465124f597`. The downloaded branch archive contained exactly 44 source files, all byte-identical to reviewed local inputs, with no private reports or unexpected files. Later documentation updates trigger their own verification runs.
 
 ## Initial 0.1 milestone
