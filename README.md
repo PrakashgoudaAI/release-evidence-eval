@@ -22,7 +22,7 @@ python3 -m tools.verify_experiment
 python3 -m tools.verify_guard
 ```
 
-Use `python` instead of `python3` where appropriate. The CI configuration targets Python 3.11 and 3.13 on Linux and Windows; those jobs have not been published or run yet.
+Use `python` instead of `python3` where appropriate. The Python 3.11/3.13 matrix passed on Linux and Windows in [GitHub CI](https://github.com/PrakashgoudaAI/release-evidence-eval/actions/runs/38909886088). The project is published on [review pull request #1](https://github.com/PrakashgoudaAI/release-evidence-eval/pull/1), pending merge.
 
 Expected offline output:
 
