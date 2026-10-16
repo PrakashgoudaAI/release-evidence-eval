@@ -46,6 +46,13 @@ jobs:
         if: ${{ !cancelled() }}
         with:
           name: evaluation-${{ matrix.os }}-${{ matrix.python }}
-          path: reports/*.json
-          if-no-files-found: warn
+          path: |
+            reports/reference.json
+            reports/comparison.json
+            reports/mutations.json
+            reports/trial-reference.json
+            reports/trial-negative-control.json
+            reports/trial-comparison.json
+            reports/public-summary.json
+          if-no-files-found: error
           retention-days: 7
