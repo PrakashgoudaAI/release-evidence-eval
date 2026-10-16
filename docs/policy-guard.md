@@ -41,11 +41,32 @@ An offline replay of the existing private six-case diagnostics (two prompts,
 12 previously captured model responses) accepted four correct answers and rejected
 eight incorrect answers. No new model requests were made. This sample was selected
 for diagnosis and is not a held-out safety benchmark. It does not demonstrate a
-general false-accept rate. Reserved cases remain unused.
+general false-accept rate. That replay used development cases only. The later
+reserved-model evaluation is documented separately and did not measure this guard.
 
 Model quality remains unchanged: v1 passed 24/48 full development attempts; v2 and
 v3 were rejected after regressions. Guard rejection is not a corrected model answer
 and must never be included in model passing-attempt counts.
+
+### Generated challenge campaign
+
+The same verification command now enumerates all 64 combinations of four abstract
+states (missing, passed, failed, contradictory) across the three required checks.
+Expected answers are derived from those state assignments without calling the
+benchmark oracle or guard's policy calculation. This is a bounded state-space
+check, not exhaustive enumeration of every record, string, or input length.
+
+For each packet, the campaign checks its correct answer and five incorrect answers:
+both alternative decisions, a changed blocker set, a changed citation set, and an
+incorrect reason set. All 320 schema-valid faults must be rejected. Then it checks
+evidence reversal, substituted log instructions, added stale failures, and added
+unrelated-check failures. No-op and duplicate transformations per packet are skipped,
+leaving 248 distinct policy-preserving variants, all of which must be accepted.
+
+The campaign also verifies that no response authorizes a release. Unit tests show
+that always-accept, always-reject, and decision-only implementations fail the campaign.
+All counts are offline generated challenges, not Qwen3 results or a measured
+production false-accept rate. This campaign does not consume reserved examples.
 
 ## Trust boundary
 

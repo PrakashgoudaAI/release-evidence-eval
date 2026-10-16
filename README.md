@@ -6,9 +6,9 @@ The evaluator checks the response contract, decision, blockers, citations, and p
 
 Start with the [five-minute walkthrough](docs/walkthrough.md) for the architecture, offline demo, actual model findings, and limitations.
 
-**Current status:** 107 automated tests pass locally. The first [real Qwen3 4B baseline](docs/experiments/001-qwen3-baseline.md) passed 24/48 attempts and produced 18 unsafe ready recommendations; the quality gate failed it. The supplied reference responses remain authored fixtures, not model results. No production-readiness or general security claim is made. See [verification](docs/verification.md).
+**Current status:** 112 automated tests pass locally. The first [real Qwen3 4B baseline](docs/experiments/001-qwen3-baseline.md) passed 24/48 attempts and produced 18 unsafe ready recommendations; the quality gate failed it. The separate [reserved evaluation](docs/experiments/005-reserved-baseline.md) passed 9/21 attempts with nine unsafe ready recommendations and also failed. The supplied reference responses remain authored fixtures, not model results. No production-readiness or general security claim is made. See [verification](docs/verification.md).
 
-The [prompt v2 comparison](docs/experiments/002-prompt-comparison.md) regressed to 15/48 passing attempts and 24 unsafe ready recommendations. V2 was rejected, not presented as an improvement. The reserved set has not been evaluated.
+The [prompt v2 comparison](docs/experiments/002-prompt-comparison.md) regressed to 15/48 passing attempts and 24 unsafe ready recommendations. V2 was rejected, not presented as an improvement. Reserved results are frozen separately, not used to retune these prompts.
 
 The [v3 comparison](docs/experiments/004-v3-comparison.md) also regressed (12/48 passing attempts). A separate [deterministic policy guard](docs/policy-guard.md) now rejects unsupported recommendations without repairing them. Guard outcomes are not counted as model accuracy, and acceptance never authorizes deployment.
 
@@ -33,7 +33,13 @@ Expected offline output:
 Caught 6/6 targeted response faults (offline fixtures, not model results).
 ```
 
-The first line proves the evaluator accepts the reference answers. The second proves it rejects six deliberately flawed responses. Neither measures a model's performance. The automated suite currently contains 107 tests.
+The first line proves the evaluator accepts the reference answers. The second proves it rejects six deliberately flawed responses. Neither measures a model's performance. The automated suite currently contains 112 tests.
+
+The guard challenge additionally accepts 64 generated policy-consistent answers,
+rejects 320 deliberate decision/blocker/citation/reason faults, and accepts 248
+distinct policy-preserving transformations. Always-accept, always-reject, and
+decision-only test doubles fail this challenge. These bounded generated checks are
+not model responses, security certification, or evidence that input records are authentic.
 
 ## Repeated trials, not a lucky answer
 
