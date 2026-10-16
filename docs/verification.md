@@ -90,7 +90,13 @@ and schema hashes matched. Repeated-trial reports already used a text reader wit
 newline normalization, while the single-run reader preserved bytes. Rather than
 silently change prompt fingerprint semantics or historical reports, `.gitattributes`
 now requires LF checkout for text files. Tests check this rule and checked-out
-prompt bytes. Cross-platform artifact equality must be rechecked after the change.
+prompt bytes. After the change, all four jobs passed in
+[run 38912424848](https://github.com/PrakashgoudaAI/release-evidence-eval/actions/runs/38912424848).
+All four new report archives were downloaded and checked: their seven reports had
+identical parsed JSON contents, including prompt fingerprints, across platforms and
+Python versions. The reference prompt hash matched the preserved model baseline.
+The archives passed the same bounded known-credential-pattern checks. JSON file
+newline formatting and ZIP metadata are not claimed byte-identical.
 
 CI artifact upload now names seven offline reports explicitly instead of using a
 reports-directory wildcard. A test prevents broadening that list accidentally.
