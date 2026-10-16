@@ -4,12 +4,12 @@ Date: 16 October 2026. Environment: macOS, Python 3.9.6 supplied by the host. Ea
 
 ## Current summary
 
-- 107 automated tests pass locally. Offline reference, mutation, repeated-trial negative-control, and policy-guard checks pass.
+- 112 automated tests pass locally. Offline reference, mutation, repeated-trial negative-control, and policy-guard checks pass.
 - Qwen3 development results: v1 24/48 passing attempts, v2 15/48, v3 12/48. All failed the quality gate; both candidates were rejected. See the [v3 study](experiments/004-v3-comparison.md).
 - A private 12-response diagnostic replay accepted four correct recommendations and rejected eight incorrect ones through the new [policy guard](policy-guard.md). This selected development sample is not held-out validation and does not improve raw model accuracy.
 - The guard accepted all 16 authored development answers and rejected 32 deliberately wrong decisions. It does not authorize deployment or authenticate evidence.
 - Known-pattern source scanning passed, but Git history is unavailable because this project is not a Git repository. No full security-audit claim is made.
-- Reserved-model evaluation and independent review remain outstanding. Source history, checks, and merge status are tracked in [pull request #1](https://github.com/PrakashgoudaAI/release-evidence-eval/pull/1).
+- The [reserved-model evaluation](experiments/005-reserved-baseline.md) completed: 9/21 passing attempts, 3/7 robust cases, nine unsafe-ready attempts, zero provider errors, zero instability, and a failed gate. Original fingerprints were verified. Independent review remains outstanding. The implementation was merged through [pull request #1](https://github.com/PrakashgoudaAI/release-evidence-eval/pull/1).
 - All four Python 3.11/3.13 Linux/Windows jobs passed in [the initial CI run](https://github.com/PrakashgoudaAI/release-evidence-eval/actions/runs/38909886088), at commit `49494e8aec8e706fc26ed3e9335b87465124f597`. The downloaded branch archive contained exactly 44 source files, all byte-identical to reviewed local inputs, with no private reports or unexpected files. Later documentation updates trigger their own verification runs.
 
 ## Initial 0.1 milestone
@@ -41,7 +41,7 @@ Both ordinary and repeated-trial reports omit raw content. The new failure-analy
 ## Not yet verified
 
 - Independent runtime API attestation and model comparisons across different settings/hardware.
-- Held-out evaluation, natural-language claim scoring, tool-use safety, or independent security review.
+- Blind external evaluation, natural-language claim scoring, tool-use safety, or independent security review.
 
 ## Publication-safety milestone
 

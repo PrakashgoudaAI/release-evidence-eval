@@ -64,7 +64,9 @@ than selecting only successful examples.
 The guard rejected eight incorrect and accepted four correct previously captured
 diagnostic answers. This was a selected 12-response development replay, not a
 held-out safety benchmark. It neither changes the table above nor proves a general
-false-accept rate. Reserved model evaluation remains outstanding.
+false-accept rate. The separate [reserved evaluation](experiments/005-reserved-baseline.md)
+later passed 9/21 attempts with nine unsafe ready recommendations; its gate failed.
+The guard was not applied to captured reserved responses.
 
 ## Why use a model for a deterministic policy?
 
