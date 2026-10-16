@@ -4,6 +4,8 @@ An evaluation harness for an assistant that reads CI evidence and recommends **r
 
 The evaluator checks the response contract, decision, blockers, citations, and policy reasons separately. Every case must pass; repeated-trial experiments require every attempt to pass.
 
+Start with the [five-minute walkthrough](docs/walkthrough.md) for the architecture, offline demo, actual model findings, and limitations.
+
 **Current status:** 107 automated tests pass locally. The first [real Qwen3 4B baseline](docs/experiments/001-qwen3-baseline.md) passed 24/48 attempts and produced 18 unsafe ready recommendations; the quality gate failed it. The supplied reference responses remain authored fixtures, not model results. No production-readiness or general security claim is made. See [verification](docs/verification.md).
 
 The [prompt v2 comparison](docs/experiments/002-prompt-comparison.md) regressed to 15/48 passing attempts and 24 unsafe ready recommendations. V2 was rejected, not presented as an improvement. The reserved set has not been evaluated.
@@ -22,7 +24,7 @@ python3 -m tools.verify_experiment
 python3 -m tools.verify_guard
 ```
 
-Use `python` instead of `python3` where appropriate. The Python 3.11/3.13 matrix passed on Linux and Windows in [GitHub CI](https://github.com/PrakashgoudaAI/release-evidence-eval/actions/runs/38909886088). The project is published on [review pull request #1](https://github.com/PrakashgoudaAI/release-evidence-eval/pull/1), pending merge.
+Use `python` instead of `python3` where appropriate. The Python 3.11/3.13 matrix passed on Linux and Windows in [GitHub CI](https://github.com/PrakashgoudaAI/release-evidence-eval/actions/runs/38912424848). Implementation and verification history are tracked in [pull request #1](https://github.com/PrakashgoudaAI/release-evidence-eval/pull/1).
 
 Expected offline output:
 
