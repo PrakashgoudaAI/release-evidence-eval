@@ -8,7 +8,7 @@ Prompt v2 already existed before the baseline run. It expresses the policy as in
 
 Both runs used `qwen3:4b`, temperature 0, seed 42, non-thinking mode, 16 development cases, three trials, and no retries. The downloaded model manifest retained SHA-256 `31d9857b5705086d352d4d6db04e86c5d0f6a2b5d59a4dc7ce5cdb271ccf9141`. The seven reserved cases were not used.
 
-The user executed the helper locally. The agent checked the resulting report's input fingerprints, independently reran the comparison logic, and confirmed its saved comparison matched. The v1 report's checksum was unchanged.
+The helper ran locally. Review checked the report's input fingerprints and recomputed the comparison from the saved results; it matched the saved comparison. The v1 report's checksum was unchanged. These are consistency checks, not independent attestation of inference.
 
 ## Results
 
