@@ -126,7 +126,7 @@ The optional adapter uses Ollama's [chat API](https://docs.ollama.com/api/chat) 
 python3 -m release_eval --ollama-model YOUR_LOCAL_MODEL --allow-live --report reports/model-run.json
 ```
 
-Replace `YOUR_LOCAL_MODEL` with an actual installed model name. This project does not install Ollama, download models, select a model for you, or make live calls in CI. A local Qwen3 4B baseline and prompt comparison have completed; neither prompt passed the gate. Reserved-set evaluation remains pending.
+Replace `YOUR_LOCAL_MODEL` with an actual installed model name. This project does not install Ollama, download models, select a model for you, or make live calls in CI. A local Qwen3 4B baseline and prompt comparison have completed; neither prompt passed the gate. The [reserved evaluation](docs/experiments/005-reserved-baseline.md) also completed and failed its gate: 9/21 passing attempts. These results do not establish general model accuracy.
 
 The HTTP target is fixed to `127.0.0.1`; use `--port` for another loopback port. Environment proxies and redirects are disabled. A local endpoint does **not** prove local inference: confirm that your Ollama model/runtime does not relay requests to a cloud service before using non-synthetic data.
 

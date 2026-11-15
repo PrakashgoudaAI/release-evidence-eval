@@ -5,14 +5,14 @@ Date: 16 October 2026. Scope: 16 synthetic development cases, three trials each.
 ## Configuration
 
 - Model: `qwen3:4b`, with all downloaded blobs checked against their manifest SHA-256 values.
-- Installed Ollama app: 0.40.5. Runtime API/version attestation was not independently captured by the agent.
+- Installed Ollama app: 0.40.5. Runtime API/version attestation was not independently captured.
 - Hardware: Apple M4 Pro, 24 GB memory; macOS 27.0.1.
 - Temperature: 0; seed: 42; Qwen3 thinking mode: disabled explicitly.
 - Prompt: the original `reviewer.txt`; structured-output schema enabled.
 - Runner: 0.2.0; report format: 2; rubric: 1.
 - No retries. No provider errors. The reserved set was not evaluated in this run.
 
-The user executed the local helper because the agent environment cannot access the localhost API. The agent read the resulting private report, validated its case/trial structure, matched its input fingerprints to the current dataset and prompt, and independently recomputed the totals below. That validates the report's internal consistency, not a cryptographically signed execution history.
+The local evaluation helper produced a private report. Review checked its case/trial structure and input fingerprints, then recomputed the totals below from the saved results. These checks establish internal consistency; they do not independently attest runtime identity or authenticate execution history.
 
 ## Results
 

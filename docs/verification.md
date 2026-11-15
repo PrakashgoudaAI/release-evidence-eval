@@ -1,6 +1,6 @@
 # Verification — local milestones
 
-Date: 16 October 2026. Environment: macOS, Python 3.9.6 supplied by the host. Earlier sections record historical milestones; current results and limitations are summarized below.
+Updated: 15 November 2026. The initial local milestones used macOS and Python 3.9.6. Sections below retain those historical observations; they are not statements of current project status.
 
 ## Current summary
 
@@ -8,7 +8,7 @@ Date: 16 October 2026. Environment: macOS, Python 3.9.6 supplied by the host. Ea
 - Qwen3 development results: v1 24/48 passing attempts, v2 15/48, v3 12/48. All failed the quality gate; both candidates were rejected. See the [v3 study](experiments/004-v3-comparison.md).
 - A private 12-response diagnostic replay accepted four correct recommendations and rejected eight incorrect ones through the new [policy guard](policy-guard.md). This selected development sample is not held-out validation and does not improve raw model accuracy.
 - The guard accepted all 16 authored development answers and rejected 32 deliberately wrong decisions. It does not authorize deployment or authenticate evidence.
-- Known-pattern source scanning passed, but Git history is unavailable because this project is not a Git repository. No full security-audit claim is made.
+- The project is published in Git. The publication check scans current files and reachable Git blobs when history is available, and reports that availability explicitly. Earlier source-only milestones below had no Git history. These bounded checks are not a full security audit.
 - The [reserved-model evaluation](experiments/005-reserved-baseline.md) completed: 9/21 passing attempts, 3/7 robust cases, nine unsafe-ready attempts, zero provider errors, zero instability, and a failed gate. Original fingerprints were verified. Independent review remains outstanding. The implementation was merged through [pull request #1](https://github.com/PrakashgoudaAI/release-evidence-eval/pull/1).
 - All four Python 3.11/3.13 Linux/Windows jobs passed in [the initial CI run](https://github.com/PrakashgoudaAI/release-evidence-eval/actions/runs/38909886088), at commit `49494e8aec8e706fc26ed3e9335b87465124f597`. The downloaded branch archive contained exactly 44 source files, all byte-identical to reviewed local inputs, with no private reports or unexpected files. Later documentation updates trigger their own verification runs.
 
@@ -26,7 +26,7 @@ These are harness results. The fixture score is not model accuracy. Adapter test
 
 ## Stronger offline 0.2 milestone
 
-The user explicitly selected an offline milestone; no runtime or model was installed.
+This milestone used offline fixtures; no runtime or model was installed at that stage.
 
 - All 73 tests passed, including the original suite and repeated-trial/split-integrity checks.
 - Added seven policy-validated reserved cases, covering every risk slice separately from the 16 development cases.
@@ -45,27 +45,27 @@ Both ordinary and repeated-trial reports omit raw content. The new failure-analy
 
 ## Publication-safety milestone
 
-After the user confirmed no hosted API account was available, strengthened the local execution and publication path without creating an account or making paid calls.
+This milestone strengthened local execution and publication checks without a hosted API account or paid calls.
 
 - 92 tests pass locally, including explicit live-call permission, CI network blocking, failed-request budget consumption, zero-call planning, and publication export checks.
-- Known-pattern source scanning passed. The real project has no Git repository, so its history is unavailable and is not claimed clean.
+- Known-pattern source scanning passed on the source-only copy. Git history was unavailable at this stage, so no history-scan result was claimed.
 - A temporary test repository verified detection of a synthetic token removed from current files but still reachable in history. Matched values were not printed.
 - The allowlisted summary export passed an explicit artifact scan. It omits raw/private fields and model names; identifiers and fingerprints still require human review.
 - The README now describes the task directly, without promotional claims. No model accuracy or prompt improvement was invented.
 
-No hosted adapter/account, local runtime, or real-model evaluation is available yet. CI is configured but remains unexecuted for this unpublished project. Guardrails are not a comprehensive security audit or a provider-side spending cap.
+At this stage, no hosted adapter/account, local runtime or real-model evaluation was available. CI was configured but had not yet run. Later sections record runtime evaluation and hosted CI. Guardrails are not a comprehensive security audit or a provider-side spending cap.
 
 ## Local runtime setup — 16 October 2026
 
-The user installed Ollama 0.40.5 and started it through the local-only launcher. A read-only listener check observed `127.0.0.1:11434`, not a wildcard/network-interface bind. The launcher requests cloud disablement and a small environment; this is not a claim that all runtime behavior has been independently audited.
+Ollama 0.40.5 was installed and started through the local-only launcher. A read-only listener check observed `127.0.0.1:11434`, not a wildcard/network-interface bind. The launcher requests cloud disablement and a small environment; this is not a claim that all runtime behavior has been independently audited.
 
-The user downloaded `qwen3:4b`. All six model-manifest blobs were present, had their expected sizes, and passed SHA-256 checks against the manifest. The downloaded manifest's SHA-256 is `31d9857b5705086d352d4d6db04e86c5d0f6a2b5d59a4dc7ce5cdb271ccf9141`. The principal weights blob is `sha256:3e4cb14174460404e7a233e531675303b2fbf7749c02f91864fe311ab6344e4f`. File verification is not evidence that inference works or that a model is safe.
+The local setup downloaded `qwen3:4b`. All six model-manifest blobs were present, had their expected sizes, and passed SHA-256 checks against the manifest. The downloaded manifest's SHA-256 is `31d9857b5705086d352d4d6db04e86c5d0f6a2b5d59a4dc7ce5cdb271ccf9141`. The principal weights blob is `sha256:3e4cb14174460404e7a233e531675303b2fbf7749c02f91864fe311ab6344e4f`. File verification is not evidence that inference works or that a model is safe.
 
-The adapter now rejects `:cloud` names and requests non-thinking mode for Qwen3, with both behaviors tested. All 94 tests pass locally. The agent's localhost requests are denied by its environment (errno 1), and Terminal access is unavailable. A user-run local evaluation helper was prepared with 48 requests, private report permissions, and a fresh report directory per run. No live evaluation result is claimed until those files are actually produced and reviewed.
+The adapter now rejects `:cloud` names and requests non-thinking mode for Qwen3, with both behaviors tested. All 94 tests pass locally. A local evaluation helper was prepared with 48 requests, private report permissions and a fresh report directory per run. Report checks run separately from inference; no independent runtime attestation was captured. Live results were recorded in the next milestone after report generation and review.
 
 ## First real-model baseline
 
-The user-run helper produced a private report for Qwen3 4B, three trials across 16 development cases. The report's structure and input fingerprints were checked; its totals were independently recomputed: 24/48 passing attempts, 8/16 robust passes, 18 unsafe-ready attempts, zero provider errors, and zero unstable cases. All 48 outputs satisfied the schema. The quality gate failed.
+The local helper produced a private report for Qwen3 4B, three trials across 16 development cases. The report's structure and input fingerprints were checked; its totals were independently recomputed: 24/48 passing attempts, 8/16 robust passes, 18 unsafe-ready attempts, zero provider errors, and zero unstable cases. All 48 outputs satisfied the schema. The quality gate failed.
 
 See [the baseline study](experiments/001-qwen3-baseline.md) for configuration, case-level findings, fingerprints, and limitations. The source report is preserved unchanged with SHA-256 `a950bb5701eeb50f925643322a7fb5415cee2a78b4575142f8fbb120d8ce816f`. No raw responses were retained, so exact wrong reason/citation sets and complete root causes cannot be reconstructed. Prompt v2 and reserved-set performance remain unmeasured. No claim of improvement, exfiltration, or production reliability is made.
 
@@ -75,7 +75,7 @@ Prompt v2 completed with 15/48 passing attempts, 5/16 robust passes, 24 unsafe-r
 
 The comparison report SHA-256 is `fbe979bb7f6a09ee93f6c901436f65e4e0b98aa0bc0ca129f653a292b14f0767`. See [the comparison study](experiments/002-prompt-comparison.md). The v2 review-summary known-pattern scan passed; no upload occurred. Raw answers and a complete root cause remain unavailable, and reserved-set performance is still unmeasured.
 
-## Before publishing
+## Historical publication review
 
 ### Follow-up artifact review
 
